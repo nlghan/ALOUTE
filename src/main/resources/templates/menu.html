@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport">
+	<title>Post</title>
+</head>
+
+<style>
+	.a {
+	    text-decoration: none;
+	    color: black;
+	}
+</style>
+
+<body>
+	<header id="sidebarMenu" th:fragment="menu">
+		<div class="sidebar">
+			<div class="logo">
+				<img src="/images/Logo1.png" alt="logo" />
+			</div>
+			<div class="Menu">
+				<ul class="list-Menu">
+					<a href="/listpost" class="link-item a">
+						<li class="list-item">
+							<i class="fa-solid fa-house list-item-icon"></i><span class="list-item-name">Home</span>
+						</li>
+					</a>
+					<a class="link-item a" href="/explore">
+						<li class="list-item">
+							<i class="fa-regular fa-compass list-item-icon"></i><span
+								class="list-item-name">Explore</span>
+						</li>
+					</a>
+					<a class="link-item a" href="/listgroup">
+
+						<li class="list-item">
+							<i class="fa-solid fa-user-group list-item-icon"></i><span
+								class="list-item-name">Group</span>
+						</li>
+					</a>
+					<a href="/list_Conversation" class="link-item a">
+						<li class="list-item">
+							<i class="fa-brands fa-facebook-messenger list-item-icon"></i><span
+								class="list-item-name">Messages</span>
+						</li>
+					</a>
+					<a href="/notification/notification-list" class="link-item has-noti a">
+						<li class="list-item">
+							<i class="fa-regular fa-heart list-item-icon"></i><span
+								class="list-item-name">Notifications</span>
+						</li>
+					</a>
+					<a class="link-item js-post a">
+						<li class="list-item">
+							<i class="fa-regular fa-square-plus list-item-icon"></i><span
+								class="list-item-name">Create</span>
+						</li>
+					</a>
+					<a class="link-item a" th:href="@{'/profile/' + ${session.userInfoID}}" role="button">
+						<li class="list-item">
+							<i class="fa-regular fa-user list-item-icon"></i>
+							<span class="list-item-name">Profile</span>
+						</li>
+					</a>
+				</ul>
+			</div>
+			<div class="more">
+				<ul class="list-Menu">
+					<a class="link-item a" href="/logout" role="button">
+						<li class="list-item">
+							<i class="fa-solid fa-arrow-right-from-bracket list-item-icon"></i><span
+								class="list-item-name">Log out</span>
+						</li>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport">
+<title>Post</title>
+</head>
+
+<body>
+
+	<div class="img-w" th:fragment="post (post)" >
+		<!--  -->
+		<img th:src="${post?.imageURL}" class="img-w-1" />
+		
+		<div class="overlay"
+			style="color: white; display: flex; justify-content: center; align-items: center;">
+			<div style="margin-right: 15px; cursor: pointer" th:onclick="'detailpost(' + ${post.postID} + ')'" >
+				<i class="fa-solid fa-heart list-item-icon"></i> <span
+					th:text="${post.likeCount}"></span>
+			</div>
+			<div style="cursor: pointer" th:onclick="'detailpost(' + ${post.postID} + ')'" >
+				<i class="fa-solid fa-comment list-item-icon"></i> <span
+					th:text="${post.commentCount}"></span>
+			</div>
+
+			<button style="cursor: pointer; font-size: 20px" class="js-post-edit"
+				th:at="${post.userID}">
+				<i class="fa-solid fa-ellipsis list-item-icon"
+					style="color: #ffffff; margin-left: 15px"
+					th:onclick="'setAttr(' + ${post.postID} + ')'"></i>
+			</button>
+
+			<div class="comment-edit js-comment-edit">
+				<div class="comment-edit-form js-comment-edit-form">
+					<div class="comment-edit-link">
+						<a id="deletepost">Delete</a>
+					</div>
+					<div class=" comment-edit-link">
+						<a id="editpost" onclick="showEditForm()" style="cursor: pointer;">Edit</a>
+					</div>
+					<div class="comment-edit-link-normal">
+						<a class="js-post-edit-close " style="cursor: pointer;">Cancel</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script defer>
+		function loadAjax() {
+			console.log("/listpost/group/" + page);
+			$.ajax({
+				type: 'GET',
+				url: '/listpost/group/' + page,  // Thay đổi đường dẫn API và tham số theo nhu cầu của bạn
+		
+				success: function (data) {
+					console.log(data);
+					if (data.trim() !== "") {
+						console.log("data k null");
+						loading = true;
+						page++;
+					} else {
+		
+						loading = false;
+					}
+					console.log(page);
+		
+					$("#listpost").append(data);
+					//Hiện form edit post
+					postEdits = document.querySelectorAll(".js-post-edit");
+					for (const postEdit of postEdits) {
+						postEdit.addEventListener("click", showCommentEditForm);
+					}
+				},
+				error: function (error) {
+					alert("error")
+					console.error('Error loading data:', error);
+					loading = false;
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>

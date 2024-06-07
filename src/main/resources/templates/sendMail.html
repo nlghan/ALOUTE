@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Send Email</title>
+    <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/sendEmail.css">
+<meta http-equiv="Content-Security-Policy"
+	content="default-src 'self'; 
+    script-src 'self'; 
+    style-src 'self' https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css;
+    font-src 'self';
+    form-action 'self';
+    ">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<body>
+    <div class="container">
+        <h2 class="mt-3" data-ripple>Send Email Form</h2>
+
+		<!-- Thêm trường action và trường object -->
+        <form action="sendmail" method="post" enctype="multipart/form-data" th:action="@{/sendmail}" th:object="${mail}">
+        	
+        	<!-- Thêm đoạn mã chống csrf -->
+        	<input type="hidden" name="csrfToken" th:value="${csrfToken}" />
+
+            <div class="form-group">
+                <label for="to">To:</label>
+                <input type="text" class="form-control" id="to" name="to" placeholder="Receiver"
+                    th:value="${emailcookie != null ? emailcookie : ''}" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Send</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport">
+	<title>Post</title>
+</head>
+
+<body>
+	<div></div>
+	<aside class="asideMenu" th:fragment="asideMenu (list)">
+		<div class="suggest">
+			<p class="suggest-text">Suggested for you</p>
+			<a href="/friends/suggest-follow-up" class="suggest-link">See All</a>
+		</div>
+		<div class="listFriend">
+			<div th:each="user : ${list}" class="account">
+				<div class="account-info">
+					<img th:src="${user.avata}" alt="avatar" class="avatar" />
+					<div class="account-name">
+						<h5 th:text="${user.fullName}"></h5>
+						<p th:text="${user.address}"></p>
+					</div>
+				</div>
+				<button class="button btn-follow js-click" style="font-size: 14px; font-weight: 500"
+					th:data-user-id="${user.userID}" data-follow-status="false"
+					onclick="followUser(this)">Follow</button>
+			</div>
+		</div>
+	</aside>
+
+</body>
+
+</html>
